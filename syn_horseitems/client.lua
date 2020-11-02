@@ -8,7 +8,8 @@ AddEventHandler("syn:haycube", function(source)
             local Cavallo = GetMount(Ped)
             --if IsThisModelAHorse(Cavallo) then
                 
-                TaskAnimalInteraction(Ped, Cavallo, -224471938, true, true) --Animazione
+                --TaskAnimalInteraction(Ped, Cavallo, -224471938, true, true) --Animazione
+                TaskAnimalInteraction(Ped, Cavallo, -224471938, GetHashKey("s_horsnack_haycube01x"), 0)
                 
                 local valueHealth = Citizen.InvokeNative(0x36731AC041289BB1, Cavallo, 0)
                 local valueStamina = Citizen.InvokeNative(0x36731AC041289BB1, Cavallo, 1)
@@ -48,7 +49,7 @@ AddEventHandler("syn:carrot", function(source)
             local Cavallo = GetMount(Ped)
             --if IsThisModelAHorse(Cavallo) then
                 
-                TaskAnimalInteraction(Ped, Cavallo, -224471938, true, true) --Animazione
+                TaskAnimalInteraction(Ped, Cavallo, -224471938, GetHashKey("p_carrot02x"), 0) --Animazione
                 
                 local valueHealth = Citizen.InvokeNative(0x36731AC041289BB1, Cavallo, 0)
                 local valueStamina = Citizen.InvokeNative(0x36731AC041289BB1, Cavallo, 1)
@@ -88,7 +89,8 @@ AddEventHandler("syn:horsestimulant", function(source)
             local Cavallo = GetMount(Ped)
             --if IsThisModelAHorse(Cavallo) then
                 
-                TaskAnimalInteraction(PlayerPedId(), Cavallo,-1355254781, 0, 0) --stem
+                --TaskAnimalInteraction(PlayerPedId(), Cavallo,-1355254781, 0, 0) --stem
+                TaskAnimalInteraction(PlayerPedId(), Cavallo, -1355254781, GetHashKey("p_cs_syringe01x"), 0)
 
                 local valueHealth = Citizen.InvokeNative(0x36731AC041289BB1, Cavallo, 0)
                 local valueStamina = Citizen.InvokeNative(0x36731AC041289BB1, Cavallo, 1)
@@ -120,13 +122,16 @@ AddEventHandler('syn:brush', function(source)
     local Distanza = GetDistanceBetweenCoords(pCoords, cCoords)
         if Distanza < 1.0 then
         TriggerEvent("vorp:TipRight", "You used the brush", 5000)
-        TaskAnimalInteraction(Ped, Cavallo, 1968415774, true, true)
+        --TaskAnimalInteraction(Ped, Cavallo, 1968415774, GetHashKey("P_BRUSHHORSE02X"), 0)
+        TaskAnimalInteraction(Ped, Cavallo, 554992710, GetHashKey("P_BRUSHHORSE02X"), 0)
+         
         local valueHealth = Citizen.InvokeNative(0x36731AC041289BB1, Cavallo, 0) -- Controlla la vita del cavallo
         if not tonumber(valueHealth) then valueHealth = 0 end
         Citizen.Wait(3000)
         Citizen.InvokeNative(0xC6258F41D86676E0, Cavallo, 0, valueHealth + 5) -- Cura il cavallo di poco (5)
         Citizen.InvokeNative(0x6585D955A68452A5, Cavallo) -- Pulisce il cavallo
         Citizen.InvokeNative(0xB5485E4907B53019, Cavallo) -- Setta il cavallo bagnato
+        
         else
         TriggerEvent("vorp:TipRight", "You are not near your horse", 3000) 
         Wait(0)
